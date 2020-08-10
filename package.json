@@ -1,0 +1,40 @@
+{
+  "name": "ts-axios",
+  "version": "1.0.0",
+  "description": "this is axios lib",
+  "main": "dist/ts-axios.umd.js",
+  "module": "dist/ts-axios.es5.js",
+  "typings": "dist/types/ts-axios.d.ts",
+  "scripts": {
+    "dev": "node examples/server.js",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "start": "rollup -c rollup.config.ts -w"
+  },
+  "keywords": [
+    "ts",
+    "axios",
+    "rollup"
+  ],
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "author": "wangjp <943375372@qq.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "lodash.camelcase": "^4.3.0",
+    "rollup": "^2.23.1",
+    "rollup-plugin-sourcemaps": "^0.6.2",
+    "rollup-plugin-typescript2": "^0.27.2",
+    "ts-loader": "^8.0.2",
+    "typedoc": "^0.18.0",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
+  }
+}
