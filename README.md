@@ -1,1 +1,1 @@
-使用 ts 实现 axios
+使用 typescript 实现 axios
