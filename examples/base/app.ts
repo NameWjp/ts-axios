@@ -18,48 +18,6 @@ import axios from '../../src'
 //   }
 // })
 //
-// const date = new Date()
-//
-// axios({
-//   method: 'get',
-//   url: '/base/get',
-//   params: {
-//     date
-//   }
-// })
-//
-// axios({
-//   method: 'get',
-//   url: '/base/get',
-//   params: {
-//     foo: '@:$, '
-//   }
-// })
-//
-// axios({
-//   method: 'get',
-//   url: '/base/get',
-//   params: {
-//     foo: 'bar',
-//     baz: null
-//   }
-// })
-//
-// axios({
-//   method: 'get',
-//   url: '/base/get#hash',
-//   params: {
-//     foo: 'bar'
-//   }
-// })
-//
-// axios({
-//   method: 'get',
-//   url: '/base/get?foo=bar',
-//   params: {
-//     bar: 'baz'
-//   }
-// })
 
 axios({
   method: 'post',
@@ -68,25 +26,19 @@ axios({
     a: 1,
     b: 2
   }
+}).then((res) => {
+  console.log(res)
 })
 
 axios({
   method: 'post',
   url: '/base/post',
-  headers: {
-    'content-type': 'application/json',
-    'Accept': 'application/json, text/plain, */*'
-  },
+  responseType: 'json',
   data: {
-    a: 1,
-    b: 2
+    a: 3,
+    b: 4
   }
+}).then((res) => {
+  console.log(res)
 })
 
-const arr = new Int32Array([21, 31])
-
-axios({
-  method: 'post',
-  url: '/base/buffer',
-  data: arr
-})
