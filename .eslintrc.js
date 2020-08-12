@@ -5,5 +5,8 @@ module.exports = {
   env:{
     browser: true,
     node: true,
+  },
+  rules: {
+    '@typescript-eslint/ban-types': 0
   }
 }

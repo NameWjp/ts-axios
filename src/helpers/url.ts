@@ -1,4 +1,4 @@
-import { isDate, isObject } from './util'
+import { isDate, isPlanObject } from './util'
 
 function encode(val: string): string {
   return encodeURIComponent(val)
@@ -34,14 +34,14 @@ export function buildURL(url: string, params?:any): string {
     values.forEach((val) => {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlanObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)
     })
   })
 
-  let serializedParams = parts.join('&')
+  const serializedParams = parts.join('&')
 
   if (serializedParams) {
     const markIndex = url.indexOf('#')

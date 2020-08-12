@@ -1,9 +1,13 @@
 const toString = Object.prototype.toString
 
-export function isDate(val: any): val is Date {
+export function isDate(val: unknown): val is Date {
   return toString.call(val) === '[object Date]'
 }
 
-export function isObject(val: any): val is Object {
+export function isObject(val: unknown): val is Object {
   return val !== null && typeof val === 'object'
+}
+
+export function isPlanObject(val: unknown): val is Record<string, unknown> {
+  return toString.call(val) === '[object Object]'
 }
