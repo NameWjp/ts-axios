@@ -1,4 +1,4 @@
-export type Mehod = 'get' | 'GET'
+export type Method = 'get' | 'GET'
 | 'delete' | 'DELETE'
 | 'head' | 'HEAD'
 | 'options' | 'OPTIONS'
@@ -8,14 +8,17 @@ export type Mehod = 'get' | 'GET'
 
 export type HttpHeaders = Record<string, string>
 
-export interface AxiosRequestConfig {
-  url: string
-  method?: Mehod
+export interface AxiosRequestMethodsConfig {
+  method?: Method
   data?: any
   params?: any
   headers?: HttpHeaders
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+}
+
+export interface AxiosRequestConfig extends AxiosRequestMethodsConfig{
+  url: string
 }
 
 export interface AxiosResponse {
@@ -35,4 +38,27 @@ export interface AxiosError extends Error {
   code?: string | null
   request?: any
   response?: AxiosResponse
+}
+
+export interface Axios {
+  request(config: AxiosRequestConfig): AxiosPromise
+
+  get(url: string, config?: AxiosRequestMethodsConfig): AxiosPromise
+
+  delete(url: string, config?: AxiosRequestMethodsConfig): AxiosPromise
+
+  head(url: string, config?: AxiosRequestMethodsConfig): AxiosPromise
+
+  options(url: string, config?: AxiosRequestMethodsConfig): AxiosPromise
+
+  post(url: string, data?: any, config?: AxiosRequestMethodsConfig): AxiosPromise
+
+  put(url: string, data?: any, config?: AxiosRequestMethodsConfig): AxiosPromise
+
+  patch(url: string, data?: any, config?: AxiosRequestMethodsConfig): AxiosPromise
+}
+
+export interface AxiosInstance extends Axios{
+  (config: AxiosRequestConfig): AxiosPromise
+  (url: string, config: AxiosRequestMethodsConfig): AxiosPromise
 }
