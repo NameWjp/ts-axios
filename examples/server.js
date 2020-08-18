@@ -27,6 +27,17 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // 路由配置
+router.get('/extend/user', function(req, res) {
+  res.json({
+    code: 0,
+    message: 'ok',
+    result: {
+      name: 'jack',
+      age: 18
+    }
+  })
+})
+
 router.get('*', function(req, res) {
   res.json(req.query)
 })
