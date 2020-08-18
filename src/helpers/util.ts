@@ -23,11 +23,13 @@ export function isPlanObject(val: unknown): val is Record<string, unknown> {
 
 export function extend<T, U>(to: T, from: U): T & U {
   function copy(instance: Record<string, any>) {
+    const source = {}
+    
     Object.getOwnPropertyNames(instance).forEach((key) => {
-      Object.assign(to, {
-        [key]: instance[key]
-      })
+      source[key] = instance[key]
     })
+    
+    Object.assign(to, source)
 
     const proto = Reflect.getPrototypeOf(instance)
 
