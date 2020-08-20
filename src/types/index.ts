@@ -8,7 +8,7 @@ export type Method = 'get' | 'GET'
 | 'patch' | 'PATCH'
 | 'put' | 'PUT'
 
-export type HttpHeaders = Record<string, string>
+export type HttpHeaders = Record<string, any>
 
 export interface AxiosRequestMethodsConfig {
   method?: Method
@@ -17,6 +17,8 @@ export interface AxiosRequestMethodsConfig {
   headers?: HttpHeaders
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+
+  [propName: string]: any
 }
 
 export interface AxiosRequestConfig extends AxiosRequestMethodsConfig{
@@ -43,6 +45,7 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  defaults: AxiosRequestMethodsConfig
   interceptors: {
     request: InterceptorManager<AxiosRequestConfig>
     response: InterceptorManager<AxiosResponse>

@@ -1,5 +1,5 @@
-import { isPlanObject } from './util'
-import { HttpHeaders } from '../types'
+import { deepMerge, isPlanObject } from './util'
+import { HttpHeaders, Method } from '../types'
 
 function normalizeHeaderName(headers: Record<string, unknown>, normalizeName: string): void {
   if (!headers) {
@@ -47,4 +47,20 @@ export function parseHeaders(headers: string): HttpHeaders {
   })
 
   return parsed
+}
+
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) {
+    return
+  }
+
+  headers = deepMerge(headers.common, headers[method], headers)
+
+  const methodsDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+
+  methodsDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }
