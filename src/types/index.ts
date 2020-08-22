@@ -23,7 +23,7 @@ export interface AxiosRequestMethodsConfig {
   [propName: string]: any
 }
 
-export interface AxiosRequestConfig extends AxiosRequestMethodsConfig{
+export interface AxiosRequestConfig extends AxiosRequestMethodsConfig {
   url: string
 }
 
@@ -70,9 +70,13 @@ export interface Axios {
   patch<T = any>(url: string, data?: any, config?: AxiosRequestMethodsConfig): AxiosPromise<T>
 }
 
-export interface AxiosInstance extends Axios{
+export interface AxiosInstance extends Axios {
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>
   <T = any>(url: string, config?: AxiosRequestMethodsConfig): AxiosPromise<T>
+}
+
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestMethodsConfig): AxiosInstance
 }
 
 export interface AxiosInterceptorManage<T> {
