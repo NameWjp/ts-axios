@@ -12,6 +12,10 @@ export function isPlanObject(val: unknown): val is Record<string, unknown> {
   return toString.call(val) === '[object Object]'
 }
 
+export function isFormData(val: any): val is FormData {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
+
 // export function extend<T, U>(to: T, from: U): T & U {
 //
 //   for (const key in from) {
