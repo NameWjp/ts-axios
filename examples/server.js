@@ -1,10 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 const router = express.Router()
+
+require('./server2')
 
 const app = express()
 const compiler = webpack(WebpackConfig)
@@ -23,23 +26,11 @@ app.use(express.static(__dirname))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-
+app.use(cookieParser())
 
 // 路由配置
-router.get('/extend/user', function(req, res) {
-  res.json({
-    code: 0,
-    message: 'ok',
-    result: {
-      name: 'jack',
-      age: 18
-    }
-  })
-})
-
-router.get('/interceptor/get', function(req, res) {
-  res.end('hello')
+router.get('/more/get', function(req, res) {
+  res.json(req.cookies)
 })
 
 router.get('*', function(req, res) {
