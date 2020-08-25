@@ -1,4 +1,4 @@
-import { isDate, isPlanObject } from './util'
+import { isDate, isPlanObject, isURLSearchParams } from './util'
 
 interface URLOrigin {
   protocol: string,
@@ -16,37 +16,45 @@ function encode(val: string): string {
     .replace(/%5D/ig, ']')
 }
 
-export function buildURL(url: string, params?:any): string {
+export function buildURL(url: string, params?:any, paramsSerializer?: (params: any) => string): string {
   if (!params) {
     return url
   }
 
-  const parts: string[] = []
+  let serializedParams
 
-  Object.entries(params).forEach(([key, val]) => {
-    if (val === null || typeof val === 'undefined') {
-      return
-    }
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    const parts: string[] = []
 
-    let values = []
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
-
-    values.forEach((val) => {
-      if (isDate(val)) {
-        val = val.toISOString()
-      } else if (isPlanObject(val)) {
-        val = JSON.stringify(val)
+    Object.entries(params).forEach(([key, val]) => {
+      if (val === null || typeof val === 'undefined') {
+        return
       }
-      parts.push(`${encode(key)}=${encode(val)}`)
-    })
-  })
 
-  const serializedParams = parts.join('&')
+      let values = []
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
+      }
+
+      values.forEach((val) => {
+        if (isDate(val)) {
+          val = val.toISOString()
+        } else if (isPlanObject(val)) {
+          val = JSON.stringify(val)
+        }
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
+    })
+
+    serializedParams = parts.join('&')
+  }
 
   if (serializedParams) {
     const markIndex = url.indexOf('#')
@@ -76,4 +84,12 @@ export function isURLSameOrigin(requestURL: string): boolean {
   const parsedOrigin = resolveURL(requestURL)
 
   return (parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host)
+}
+
+export function isAbsoluteURL(url: string): boolean {
+  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
+}
+
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL ? `${baseURL.replace(/\/+$/, '')}/${relativeURL.replace(/^\/+/, '')}` : baseURL
 }

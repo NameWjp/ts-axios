@@ -48,6 +48,11 @@ router.post('/more/upload', function(req, res) {
   res.end('upload success')
 })
 
+router.get('/more/304', function(req, res) {
+  res.status(304)
+  res.end()
+})
+
 router.get('*', function(req, res) {
   res.json(req.query)
 })

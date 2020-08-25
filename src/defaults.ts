@@ -29,7 +29,11 @@ const defaults: AxiosRequestMethodsConfig = {
     function(data: any, headers: any): any {
       return transformResponse(data)
     }
-  ]
+  ],
+
+  validateStatus(status: number): boolean {
+    return status >= 200 && status < 300
+  }
 }
 
 const methodsNoData = ['delete', 'get', 'head', 'options']
