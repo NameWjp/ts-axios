@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "node examples/server.js",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
-    "start": "rollup -c rollup.config.ts -w"
+    "start": "rollup -c rollup.config.ts -w",
+    "test": "jest --coverage"
   },
   "keywords": [
     "ts",
@@ -24,6 +25,7 @@
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
+    "@types/jest": "^26.0.10",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.4",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
@@ -34,12 +36,14 @@
     "css-loader": "^4.2.1",
     "eslint": "^7.6.0",
     "express": "^4.17.1",
+    "jest": "^26.4.2",
     "nprogress": "^0.2.0",
     "qs": "^6.9.4",
     "rollup": "^2.23.1",
     "rollup-plugin-sourcemaps": "^0.6.2",
     "rollup-plugin-typescript2": "^0.27.2",
     "style-loader": "^1.2.1",
+    "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.2",
     "typedoc": "^0.18.0",
     "typescript": "^3.9.7",
