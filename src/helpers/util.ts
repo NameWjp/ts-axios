@@ -4,11 +4,11 @@ export function isDate(val: unknown): val is Date {
   return toString.call(val) === '[object Date]'
 }
 
-export function isObject(val: unknown): val is Object {
-  return val !== null && typeof val === 'object'
-}
+// export function isObject(val: unknown): val is Object {
+//   return val !== null && typeof val === 'object'
+// }
 
-export function isPlanObject(val: unknown): val is Record<string, unknown> {
+export function isPlainObject(val: unknown): val is Record<string, unknown> {
   return toString.call(val) === '[object Object]'
 }
 
@@ -59,8 +59,8 @@ export function deepMerge(...objs: any[]): any {
       Object.keys(obj).forEach(key => {
         const val = obj[key]
 
-        if (isPlanObject(val)) {
-          if (isPlanObject(result[key])) {
+        if (isPlainObject(val)) {
+          if (isPlainObject(result[key])) {
             result[key] = deepMerge(result[key], val)
           } else {
             result[key] = deepMerge(val)

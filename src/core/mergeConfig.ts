@@ -1,5 +1,5 @@
 import { AxiosRequestMethodsConfig } from '../types'
-import { deepMerge, isPlanObject } from '../helpers/util'
+import { deepMerge, isPlainObject } from '../helpers/util'
 
 const strats = Object.create(null)
 
@@ -12,8 +12,8 @@ function fromVal2Strat(val1: any, val2: any): any {
 }
 
 function deepMergeStrat(val1: any, val2: any): any {
-  if (isPlanObject(val2)) {
-    if (isPlanObject(val1)) {
+  if (isPlainObject(val2)) {
+    if (isPlainObject(val1)) {
       return deepMerge(val1, val2)
     } else {
       return deepMerge(val2)
@@ -21,7 +21,7 @@ function deepMergeStrat(val1: any, val2: any): any {
   } else if (typeof val2 !== 'undefined') {
     return val2
   } else {
-    if (isPlanObject(val1)) {
+    if (isPlainObject(val1)) {
       return deepMerge(val1)
     } else {
       return val1

@@ -1,4 +1,4 @@
-import { isDate, isPlanObject, isURLSearchParams } from './util'
+import { isDate, isPlainObject, isURLSearchParams } from './util'
 
 interface URLOrigin {
   protocol: string,
@@ -46,7 +46,7 @@ export function buildURL(url: string, params?:any, paramsSerializer?: (params: a
       values.forEach((val) => {
         if (isDate(val)) {
           val = val.toISOString()
-        } else if (isPlanObject(val)) {
+        } else if (isPlainObject(val)) {
           val = JSON.stringify(val)
         }
         parts.push(`${encode(key)}=${encode(val)}`)

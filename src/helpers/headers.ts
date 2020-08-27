@@ -1,4 +1,4 @@
-import { deepMerge, isPlanObject } from './util'
+import { deepMerge, isPlainObject } from './util'
 import { HttpHeaders, Method } from '../types'
 
 function normalizeHeaderName(headers: Record<string, unknown>, normalizeName: string): void {
@@ -17,7 +17,7 @@ function normalizeHeaderName(headers: Record<string, unknown>, normalizeName: st
 export function processHeaders(headers: HttpHeaders, data: any): HttpHeaders {
   normalizeHeaderName(headers, 'Content-Type')
 
-  if (isPlanObject(data)) {
+  if (isPlainObject(data)) {
     if (headers && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json;charset=utf-8'
     }
