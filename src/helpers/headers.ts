@@ -34,14 +34,12 @@ export function parseHeaders(headers: string): HttpHeaders {
   }
 
   headers.split('\r\n').forEach((line) => {
-    let [key, val] = line.split(':')
+    const [name, ...vals] = line.split(':')
 
-    key = key.trim().toLowerCase()
+    const key = name.trim().toLowerCase()
     if (!key) return
 
-    if (val) {
-      val = val.trim()
-    }
+    const val = vals.join(':').trim()
 
     parsed[key] = val
   })
