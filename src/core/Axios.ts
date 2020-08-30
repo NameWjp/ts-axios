@@ -45,6 +45,7 @@ export default class Axios implements AxiosInterface {
     }
 
     config = mergeConfig(this.defaults, config)
+    config.method = config.method!.toLowerCase() as Method
 
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
