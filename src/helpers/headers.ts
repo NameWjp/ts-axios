@@ -2,10 +2,6 @@ import { deepMerge, isPlainObject } from './util'
 import { HttpHeaders, Method } from '../types'
 
 function normalizeHeaderName(headers: Record<string, unknown>, normalizeName: string): void {
-  if (!headers) {
-    return
-  }
-
   Object.keys(headers).forEach((name) => {
     if (name !== normalizeName && name.toUpperCase() === normalizeName.toUpperCase()) {
       headers[normalizeName] = headers[name]
